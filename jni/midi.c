@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Accordion - An Android Accordion written in C and Java.
+//  Melodeon - An Android Melodeon written in C and Java.
 //
 //  Copyright (C) 2013	Bill Farmer
 //
@@ -40,7 +40,7 @@ static EAS_HANDLE midiHandle;
 
 // init EAS midi
 jint
-Java_org_billthefarmer_accordion_MidiDriver_init(JNIEnv *env,
+Java_org_billthefarmer_melodeon_MidiDriver_init(JNIEnv *env,
 						 jobject clazz)
 {
     // get the library configuration
@@ -75,7 +75,7 @@ Java_org_billthefarmer_accordion_MidiDriver_init(JNIEnv *env,
 
 // midi config
 jintArray
-Java_org_billthefarmer_accordion_MidiDriver_config(JNIEnv *env,
+Java_org_billthefarmer_melodeon_MidiDriver_config(JNIEnv *env,
 						   jobject clazz)
 {
     jboolean isCopy;
@@ -99,7 +99,7 @@ Java_org_billthefarmer_accordion_MidiDriver_config(JNIEnv *env,
 
 // midi render
 jint
-Java_org_billthefarmer_accordion_MidiDriver_render(JNIEnv *env,
+Java_org_billthefarmer_melodeon_MidiDriver_render(JNIEnv *env,
 						   jobject clazz,
 						   jshortArray shortArray)
 {
@@ -140,7 +140,7 @@ Java_org_billthefarmer_accordion_MidiDriver_render(JNIEnv *env,
 
 // midi write
 jboolean
-Java_org_billthefarmer_accordion_MidiDriver_write(JNIEnv *env,
+Java_org_billthefarmer_melodeon_MidiDriver_write(JNIEnv *env,
 						  jobject clazz,
 						  jbyteArray byteArray)
 {
@@ -166,7 +166,7 @@ Java_org_billthefarmer_accordion_MidiDriver_write(JNIEnv *env,
 
 // shutdown EAS midi
 jboolean
-Java_org_billthefarmer_accordion_MidiDriver_shutdown(JNIEnv *env,
+Java_org_billthefarmer_melodeon_MidiDriver_shutdown(JNIEnv *env,
 						     jobject clazz)
 {
 

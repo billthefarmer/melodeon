@@ -269,13 +269,13 @@
 
   <string-array name="pref_key_entries">
 
-    <item>F/Bb/Eb</item>
-    <item>G/C/F</item>
-    <item>A/D/G</item>
-    <item>C#/D/G</item>
-    <item>B/C/C#</item>,
-    <item>C System</item>
-    <item>B System</item>
+    <item>Eb</item>
+    <item>Bb</item>
+    <item>F</item>
+    <item>C</item>
+    <item>G</item>
+    <item>D</item>,
+    <item>A</item>
 
   </string-array>
 
@@ -293,9 +293,8 @@
 
   <string-array name="pref_layout_entries">
 
-    <item>Standard 31 button</item>
-    <item>Lower 25 buttons</item>
-    <item>Upper 25 buttons</item>
+    <item>Melodeon</item>
+    <item>Organetto</item>
 
   </string-array>
 
@@ -303,7 +302,6 @@
 
     <item>0</item>
     <item>1</item>
-    <item>2</item>
 
   </string-array>
 

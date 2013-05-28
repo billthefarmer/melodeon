@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Accordion - An Android Accordion written in Java.
+//  Melodeon - An Android Melodeon written in Java.
 //
 //  Copyright (C) 2013	Bill Farmer
 //
@@ -89,7 +89,7 @@ public class SettingsFragment extends PreferenceFragment
 	PackageInfo info = null;
 	try
 	{
-	    info = manager.getPackageInfo("org.billthefarmer.accordion", 0);
+	    info = manager.getPackageInfo("org.billthefarmer.melodeon", 0);
 	}
 	
 	catch (NameNotFoundException e)

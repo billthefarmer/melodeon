@@ -1,6 +1,6 @@
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  Accordion - An Android Accordion written in Java.
+//  Melodeon - An Android Melodeon written in Java.
 //
 //  Copyright (C) 2013	Bill Farmer
 //

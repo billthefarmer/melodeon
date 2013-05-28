@@ -66,7 +66,7 @@
       android:key="pref_about_category"
       android:title="@string/pref_about">
 
-    <org.billthefarmer.accordion.AboutPreference
+    <org.billthefarmer.melodeon.AboutPreference
 	android:key="pref_about"
 	android:icon="@drawable/ic_about"
 	android:dialogIcon="@drawable/ic_about"

@@ -57,7 +57,8 @@ public class MainActivity extends Activity
       R.id.button_7, R.id.button_8,
       R.id.button_9, R.id.button_10},
      {R.id.button_11, R.id.button_12,
-      R.id.button_13}};
+      R.id.button_13, R.id.button_14,
+      R.id.button_15}};
 
     // Bass button ids
 
@@ -142,7 +143,7 @@ public class MainActivity extends Activity
     private boolean buttonStates[][] =
     {{false, false, false, false, false, false,
       false, false, false, false},
-     {false, false, false}};
+     {false, false, false, false, false}};
 
     private boolean bassStates[] =
     {false, false};

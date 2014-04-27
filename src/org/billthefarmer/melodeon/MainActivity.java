@@ -58,7 +58,8 @@ public class MainActivity extends Activity
       R.id.button_9, R.id.button_10},
      {R.id.button_11, R.id.button_12,
       R.id.button_13, R.id.button_14,
-      R.id.button_15}};
+      R.id.button_15, R.id.button_16,
+      R.id.button_17}};
 
     // Bass button ids
 
@@ -143,7 +144,8 @@ public class MainActivity extends Activity
     private boolean buttonStates[][] =
     {{false, false, false, false, false, false,
       false, false, false, false},
-     {false, false, false, false, false}};
+     {false, false, false, false, false,
+      false, false}};
 
     private boolean bassStates[] =
     {false, false};
@@ -189,7 +191,7 @@ public class MainActivity extends Activity
 	    break;
 
 	case LAYOUT_ORGANETTO:
-		setContentView(R.layout.activity_main_organetto);
+	    setContentView(R.layout.activity_main_organetto);
 	    break;
 	}
 
@@ -442,13 +444,13 @@ public class MainActivity extends Activity
 		    	switch(i)
 		    	{
 		    	case 0:
-					k = reverse? buttons[i].length - j - 1: j;
-					break;
+			    k = reverse? buttons[i].length - j - 1: j;
+			    break;
 
 		    	case 1:
-		    		k = reverse? buttons[i].length - j + 2: j + 3;
-		    		bellows = !bellows;
-		    		break;
+			    k = reverse? buttons[i].length - j + 1: j + 3;
+			    bellows = !bellows;
+			    break;
 		    	}
 
 			int note = notes[k][!bellows? 1: 0] +
@@ -468,7 +470,7 @@ public class MainActivity extends Activity
 			switch (i)
 			{
 			case 1:
-				bellows = !bellows;
+			    bellows = !bellows;
 			}
 		    }
 		}
@@ -540,17 +542,17 @@ public class MainActivity extends Activity
 		    {
 			int k = 0;
 
-	    	switch(i)
-	    	{
-	    	case 0:
-				k = reverse? buttons[i].length - j - 1: j;
-				break;
+			switch(i)
+			{
+			case 0:
+			    k = reverse? buttons[i].length - j - 1: j;
+			    break;
 
-	    	case 1:
-	    		k = reverse? buttons[i].length - j + 2: j + 3;
-	    		bellows = !bellows;
-	    		break;
-	    	}
+			case 1:
+			    k = reverse? buttons[i].length - j + 1: j + 3;
+			    bellows = !bellows;
+			    break;
+			}
 
 			int note = notes[k][!bellows? 1: 0] +
 			    keyvals[key];
@@ -569,7 +571,7 @@ public class MainActivity extends Activity
 			switch (i)
 			{
 			case 1:
-				bellows = !bellows;
+			    bellows = !bellows;
 			}
 		    }
 		}
@@ -644,7 +646,7 @@ public class MainActivity extends Activity
 			break;
 
 		    case 1:
-			k = (reverse)? buttons[i].length - j + 2: j + 3;
+			k = (reverse)? buttons[i].length - j + 1: j + 3;
 			bellows = !bellows;
 			break;
 		    }
@@ -721,7 +723,7 @@ public class MainActivity extends Activity
 			break;
 
 		    case 1:
-			k = (reverse)? buttons[i].length - j + 2: j + 3;
+			k = (reverse)? buttons[i].length - j + 1: j + 3;
 			bellows = !bellows;
 			break;
 		    }

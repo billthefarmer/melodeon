@@ -448,7 +448,7 @@ public class MainActivity extends Activity
 			    break;
 
 		    	case 1:
-			    k = reverse? buttons[i].length - j + 1: j + 3;
+			    k = reverse? buttons[i].length - j + 1: j + 2;
 			    bellows = !bellows;
 			    break;
 		    	}
@@ -549,7 +549,7 @@ public class MainActivity extends Activity
 			    break;
 
 			case 1:
-			    k = reverse? buttons[i].length - j + 1: j + 3;
+			    k = reverse? buttons[i].length - j + 1: j + 2;
 			    bellows = !bellows;
 			    break;
 			}
@@ -646,7 +646,7 @@ public class MainActivity extends Activity
 			break;
 
 		    case 1:
-			k = (reverse)? buttons[i].length - j + 1: j + 3;
+			k = (reverse)? buttons[i].length - j + 1: j + 2;
 			bellows = !bellows;
 			break;
 		    }
@@ -723,7 +723,7 @@ public class MainActivity extends Activity
 			break;
 
 		    case 1:
-			k = (reverse)? buttons[i].length - j + 1: j + 3;
+			k = (reverse)? buttons[i].length - j + 1: j + 2;
 			bellows = !bellows;
 			break;
 		    }

@@ -1,9 +1,9 @@
 Android Melodeon
 ================
 
-![](http://github.com/billthefarmer/melodeon/wiki/images/Melodeon.png)
+![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Melodeon.png)
 &nbsp;
-![](http://github.com/billthefarmer/melodeon/wiki/images/Melodeon-organetto.png)
+![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Melodeon-organetto.png)
 
 This project uses the Sonivox EAS library, libsonivox.so, which is included in Android, but not documented or accessible using the standard Android NDK toolkit. In order to use this library you need to:
 

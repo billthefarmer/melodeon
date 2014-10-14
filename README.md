@@ -1,6 +1,8 @@
 Android Melodeon
 ================
 
+Android melodeon emulator for tablets.
+
 ![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Melodeon.png)
 &nbsp;
 ![](https://github.com/billthefarmer/billthefarmer.github.io/raw/master/images/Melodeon-organetto.png)

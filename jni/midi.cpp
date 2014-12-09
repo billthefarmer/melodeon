@@ -23,6 +23,9 @@
 
 #include <jni.h>
 
+#include "org_billthefarmer_melodeon_MidiDriver.h"
+
+
 // for EAS midi
 #include "eas.h"
 #include "eas_reverb.h"
@@ -83,16 +86,16 @@ Java_org_billthefarmer_melodeon_MidiDriver_config(JNIEnv *env,
     if (pLibConfig == NULL)
 	return NULL;
 
-    jintArray configArray = (*env)->NewIntArray(env, 4);
+    jintArray configArray = env->NewIntArray(4);
 
-    jint *config = (*env)->GetIntArrayElements(env, configArray, &isCopy);
+    jint *config = env->GetIntArrayElements(configArray, &isCopy);
 
     config[0] = pLibConfig->maxVoices;
     config[1] = pLibConfig->numChannels;
     config[2] = pLibConfig->sampleRate;
     config[3] = pLibConfig->mixBufferSize;
 
-    (*env)->ReleaseIntArrayElements(env, configArray, config, 0);
+    env->ReleaseIntArrayElements(configArray, config, 0);
 
     return configArray;
 }
@@ -118,9 +121,9 @@ Java_org_billthefarmer_melodeon_MidiDriver_render(JNIEnv *env,
 	return 0;
 
     buffer =
-	(EAS_PCM *)(*env)->GetShortArrayElements(env, shortArray, &isCopy);
+	(EAS_PCM *)env->GetShortArrayElements(shortArray, &isCopy);
 
-    size = (*env)->GetArrayLength(env, shortArray);
+    size = env->GetArrayLength(shortArray);
 
     count = 0;
     while (count < size)
@@ -133,7 +136,7 @@ Java_org_billthefarmer_melodeon_MidiDriver_render(JNIEnv *env,
     	count += numGenerated * pLibConfig->numChannels;
     }
 
-    (*env)->ReleaseShortArrayElements(env, shortArray, buffer, 0);
+    env->ReleaseShortArrayElements(shortArray, buffer, 0);
 
     return count;
 }
@@ -151,12 +154,12 @@ Java_org_billthefarmer_melodeon_MidiDriver_write(JNIEnv *env,
     if (pEASData == NULL || midiHandle == NULL)
 	return JNI_FALSE;
 
-    buf = (EAS_U8 *)(*env)->GetByteArrayElements(env, byteArray, &isCopy);
-    length = (*env)->GetArrayLength(env, byteArray);
+    buf = (EAS_U8 *)env->GetByteArrayElements(byteArray, &isCopy);
+    length = env->GetArrayLength(byteArray);
 
     result = EAS_WriteMIDIStream(pEASData, midiHandle, buf, length);
 
-    (*env)->ReleaseByteArrayElements(env, byteArray, buf, 0);
+    env->ReleaseByteArrayElements(byteArray, (jbyte *)buf, 0);
 
     if (result != EAS_SUCCESS)
 	return JNI_FALSE;

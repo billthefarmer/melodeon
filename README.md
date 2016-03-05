@@ -1,5 +1,5 @@
-Android Melodeon
-================
+# Android Melodeon [![Build Status](https://travis-ci.org/billthefarmer/melodeon.svg?branch=master)](https://travis-ci.org/billthefarmer/melodeon)
+
 Android melodeon emulator for tablets. The app is available on [F-Droid](https://f-droid.org/repository/browse/?fdid=org.billthefarmer.melodeon)
 and [here](https://github.com/billthefarmer/melodeon/releases).
 

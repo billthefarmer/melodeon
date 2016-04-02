@@ -23,8 +23,6 @@
 
 package org.billthefarmer.melodeon;
 
-import org.billthefarmer.melodeon.MidiDriver.OnMidiStartListener;
-
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.app.ActionBar;
@@ -41,12 +39,12 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity
-    implements OnTouchListener, OnCheckedChangeListener, OnMidiStartListener
+    implements View.OnTouchListener, CompoundButton.OnCheckedChangeListener,
+	       MidiDriver.OnMidiStartListener
 {
     // Button ids
 

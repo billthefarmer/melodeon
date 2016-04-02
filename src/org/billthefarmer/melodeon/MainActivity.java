@@ -29,7 +29,6 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.res.Resources;
 import android.view.Gravity;
 import android.view.Menu;
@@ -364,7 +363,7 @@ public class MainActivity extends Activity
 	SharedPreferences preferences =
 	    PreferenceManager.getDefaultSharedPreferences(this);
 
-	Editor editor = preferences.edit();
+	SharedPreferences.Editor editor = preferences.edit();
 
 	editor.putBoolean(PREF_REVERSE, reverse);
 

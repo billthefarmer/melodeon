@@ -25,70 +25,42 @@ package org.billthefarmer.melodeon;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+// SettingsActivity
 public class SettingsActivity extends Activity
 {
-    protected boolean layoutChanged;
-
     // On create
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
 
 	// Display the fragment as the main content.
-
 	getFragmentManager().beginTransaction()
 	    .replace(android.R.id.content, new SettingsFragment())
 	    .commit();
 
 	// Enable back navigation on action bar
-
 	ActionBar actionBar = getActionBar();
 	actionBar.setDisplayHomeAsUpEnabled(true);
-
     }
 
     // On options item selected
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
 	// Switch on item id
-
 	switch (item.getItemId())
 	{
 	case android.R.id.home:
 	    // app icon in action bar clicked; go home
-	    Intent intent = new Intent(this, MainActivity.class);
-	    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-	    if (layoutChanged)
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-	    startActivity(intent);
+            finish();
 	    return true;
+
 	default:
-
-	    return super.onOptionsItemSelected(item);
+	    return false;
 	}
-    }
-
-    // On back pressed
-
-    @Override
-    public void onBackPressed()
-    {
-	Intent intent = new Intent(this, MainActivity.class);
-	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-
-	    if (layoutChanged)
-		intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-
-	startActivity(intent);
     }
 }

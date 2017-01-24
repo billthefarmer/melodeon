@@ -27,8 +27,6 @@ import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -36,6 +34,7 @@ import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
+// SettingsFragment
 public class SettingsFragment extends PreferenceFragment
     implements SharedPreferences.OnSharedPreferenceChangeListener
 {
@@ -45,13 +44,13 @@ public class SettingsFragment extends PreferenceFragment
     private static final String KEY_PREF_ABOUT = "pref_about";
     private static final String KEY_PREF_KEY = "pref_key";
 
+    // onCreate
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
 
 	// Load the preferences from an XML resource
-
 	addPreferencesFromResource(R.xml.preferences);
 
 	SharedPreferences preferences =
@@ -73,37 +72,18 @@ public class SettingsFragment extends PreferenceFragment
 	preference.setSummary(preference.getEntry());
 
 	// Get about summary
-
 	Preference about = findPreference(KEY_PREF_ABOUT);
 	String sum = (String) about.getSummary();
 
-	// Get context and package manager
-
-	Context context = getActivity();
-	PackageManager manager = context.getPackageManager();
-
-	// Get info
-
-	PackageInfo info = null;
-	try
-	{
-	    info = manager.getPackageInfo("org.billthefarmer.melodeon", 0);
-	}
-	
-	catch (Exception e)
-	{
-	    e.printStackTrace();
-	}
-
 	// Set version in text view
-
-	if (info != null)
+	if (about != null)
 	{
-	    String s = String.format(sum, info.versionName);
+	    String s = String.format(sum, BuildConfig.VERSION_NAME);
 	    about.setSummary(s);
 	}
     }
 
+    // onPause
     @Override
     public void onPause()
     {
@@ -116,7 +96,6 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     // On preference tree click
-
     @Override
     public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
 					 Preference preference)
@@ -135,7 +114,6 @@ public class SettingsFragment extends PreferenceFragment
     }
 
     // On shared preference changed
-
     @Override
     public void onSharedPreferenceChanged(SharedPreferences preferences,
 					  String key)
@@ -146,14 +124,7 @@ public class SettingsFragment extends PreferenceFragment
 	    ListPreference preference = (ListPreference)findPreference(key);
 
 	    // Set summary to be the user-description for the selected value
-
 	    preference.setSummary(preference.getEntry());
-	}
-
-	if (key.equals(KEY_PREF_LAYOUT))
-	{
-	    SettingsActivity activity = (SettingsActivity) getActivity();
-	    activity.layoutChanged = true;
 	}
     }
 }

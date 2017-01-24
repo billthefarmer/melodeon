@@ -23,30 +23,34 @@
 
 package org.billthefarmer.melodeon;
 
-import android.os.Bundle;
-import android.preference.PreferenceManager;
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnTouchListener;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Locale;
+
+import org.billthefarmer.mididriver.MidiDriver;
+
+// MainActivity
 public class MainActivity extends Activity
     implements View.OnTouchListener, CompoundButton.OnCheckedChangeListener,
 	       MidiDriver.OnMidiStartListener
 {
     // Button ids
-
     private static final int buttons[][] =
     {{R.id.button_1, R.id.button_2,
       R.id.button_3, R.id.button_4,
@@ -59,12 +63,10 @@ public class MainActivity extends Activity
       R.id.button_17}};
 
     // Bass button ids
-
     private static final int basses[] =
     {R.id.bass_1, R.id.bass_2};
 
     // List of key offset values
-
     private static final int keyvals[] =
     {3, -2, 5, 0, -5, 2, -3};
 
@@ -72,7 +74,6 @@ public class MainActivity extends Activity
     //	   { 3, -2,  5,	 0, -5,	 2, -3};
 
     // Midi notes for C Diatonic
-
     private static final byte notes[][] =
     {{52, 57}, // C Diatonic
      {55, 59},
@@ -87,7 +88,6 @@ public class MainActivity extends Activity
      {91, 86}};
 
     // Chords
-
     private static final byte bass[][][] =
     {{{39, 51}, {46, 58}},  // Eb/Bb
      {{46, 58}, {41, 53}},  // Bb/F
@@ -107,13 +107,11 @@ public class MainActivity extends Activity
      {{69, 64}, {64, 71}}}; // A/E
 
     // Midi codes
-
     private static final int noteOff = 0x80;
     private static final int noteOn  = 0x90;
     private static final int change  = 0xc0;
 
     // Preferences
-
     private final static String PREF_INSTRUMENT = "pref_instrument";
     private final static String PREF_REVERSE = "pref_reverse";
     private final static String PREF_LAYOUT = "pref_layout";
@@ -121,23 +119,21 @@ public class MainActivity extends Activity
     private final static String PREF_KEY = "pref_key";
 
     // Layouts
+    private final static int layouts[] =
+    {R.layout.activity_main,
+     R.layout.activity_main_organetto};
 
-    private static final int LAYOUT_MELODEON = 0;
-    private static final int LAYOUT_ORGANETTO = 1;
 
     // Fascias
-
     private final static int fascias[] =
     {R.drawable.bg_onyx, R.drawable.bg_teak,
      R.drawable.bg_cherry, R.drawable.bg_rosewood,
      R.drawable.bg_olivewood};
 
     // Volume
-
     private static final int VOLUME = 96;
 
     // Button states
-
     private boolean buttonStates[][] =
     {{false, false, false, false, false, false,
       false, false, false, false},
@@ -151,7 +147,6 @@ public class MainActivity extends Activity
     private boolean reverse = false;
 
     // Status
-
     private int instrument;
     private int volume;
     private int layout;
@@ -159,61 +154,53 @@ public class MainActivity extends Activity
     private int key;
 
     // MidiDriver
-
     private MidiDriver midi;
 
     // Views
 
+    
     private TextView keyView;
     private Switch revView;
     private Toast toast;
 
     // On create
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 	super.onCreate(savedInstanceState);
 
 	// Get preferences
-
 	getPreferences();
 
 	// Set layout
-
-	switch (layout)
-	{
-	case LAYOUT_MELODEON:
-	    setContentView(R.layout.activity_main);
-	    break;
-
-	case LAYOUT_ORGANETTO:
-	    setContentView(R.layout.activity_main_organetto);
-	    break;
-	}
+        setContentView(layouts[layout]);
 
 	// Add custom view to action bar
-
 	ActionBar actionBar = getActionBar();
-	actionBar.setCustomView(R.layout.text_view);
-	actionBar.setDisplayShowCustomEnabled(true);
+        if (actionBar != null)
+        {
+            actionBar.setCustomView(R.layout.text_view);
+            actionBar.setDisplayShowCustomEnabled(true);
+            keyView = (TextView)actionBar.getCustomView();
+        }
 
-	keyView = (TextView)actionBar.getCustomView();
+        // Set fascia
+        View view = findViewById(R.id.fascia);
+        if (view != null)
+            view.setBackgroundResource(fascias[fascia]);
 
 	// Create midi
-
 	midi = new MidiDriver();
 
-	setListener();
+        // Set listeners
+	setListeners();
 
 	// Set volume, let the user adjust the volume with the
 	// android volume buttons
-
 	volume = VOLUME;
     }
 
     // On create option menu
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
@@ -224,55 +211,45 @@ public class MainActivity extends Activity
     }
 
     // On resume
-
     @Override
     protected void onResume()
     {
 	super.onResume();
 
 	// Get preferences
-
 	getPreferences();
 
 	// Start midi
-
 	if (midi != null)
 	    midi.start();
     }
 
     // On pause
-
     @Override
     protected void onPause()
     {
 	super.onPause();
 
 	// Save preferences
-
 	savePreferences();
 
 	// Stop midi
-
 	if (midi != null)
 	    midi.stop();
     }
 
-    // On options item
-
+    // On options item selected
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
     {
 	// Get id
-
 	int id = item.getItemId();
 	switch (id)
 	{
 	    // Settings
-
 	case R.id.settings:
 	    Intent intent = new Intent(this, SettingsActivity.class);
 	    startActivity(intent);
-
 	    return true;
 
 	default:
@@ -281,8 +258,8 @@ public class MainActivity extends Activity
     }
 
     // On touch
-
     @Override
+    @SuppressLint("ClickableViewAccessibility")
     public boolean onTouch(View v, MotionEvent event)
     {
 	int action = event.getAction();
@@ -291,7 +268,6 @@ public class MainActivity extends Activity
 	switch (action)
 	{
 	    // Down
-
 	case MotionEvent.ACTION_DOWN:
 	    switch (id)
 	    {
@@ -303,7 +279,6 @@ public class MainActivity extends Activity
 	    }
 
 	    // Up
-
 	case MotionEvent.ACTION_UP:
 	    switch (id)
 	    {
@@ -320,7 +295,6 @@ public class MainActivity extends Activity
     }
 
     // On checked changed
-
     @Override
     public void onCheckedChanged(CompoundButton button,
 				 boolean isChecked)
@@ -330,12 +304,10 @@ public class MainActivity extends Activity
 	switch (id)
 	{
 	    // Reverse switch
-
 	case R.id.reverse:
 	    reverse = isChecked;
 
 	    // Show toast
-
 	    if (reverse)
 		showToast(R.string.buttons_reversed);
 
@@ -351,77 +323,92 @@ public class MainActivity extends Activity
     public void onMidiStart()
     {
 	// Set instrument
-
 	for (int i = 0; i <= buttons.length; i++)
-	    midi.writeChange(change + i, instrument);
+	    writeChange(change + i, instrument);
     }
 
     // Save preferences
-
     private void savePreferences()
     {
 	SharedPreferences preferences =
 	    PreferenceManager.getDefaultSharedPreferences(this);
 
 	SharedPreferences.Editor editor = preferences.edit();
-
 	editor.putBoolean(PREF_REVERSE, reverse);
-
-	editor.commit();
+	editor.apply();
     }
 
     // Get preferences
-
     private void getPreferences()
     {
 	// Load preferences
-
 	PreferenceManager.setDefaultValues(this, R.xml.preferences, false);
 
 	SharedPreferences preferences =
 	    PreferenceManager.getDefaultSharedPreferences(this);
 
 	// Set preferences
-
 	instrument =
 	    Integer.parseInt(preferences.getString(PREF_INSTRUMENT, "21"));
-	layout =
+
+        // Set layout
+	int layout =
 	    Integer.parseInt(preferences.getString(PREF_LAYOUT, "0"));
-	fascia =
+
+        // Layout changed
+        if (layout != this.layout)
+        {
+            this.layout = layout;
+            setContentView(layouts[layout]);
+            setListeners();
+
+            // Set fascia
+            View view = findViewById(R.id.fascia);
+            if (view != null)
+                view.setBackgroundResource(fascias[fascia]);
+        }
+
+        // Get fascia
+        int fascia =
 	    Integer.parseInt(preferences.getString(PREF_FASCIA, "0"));
-	key =
-	    Integer.parseInt(preferences.getString(PREF_KEY, "2"));
 
-	// Set key text
+        // Fascia changed
+        if (fascia != this.fascia)
+        {
+            this.fascia = fascia;
+            View view = findViewById(R.id.fascia);
+            if (view != null)
+                view.setBackgroundResource(fascias[fascia]);
+        }
 
+        // Get key
+	key = Integer.parseInt(preferences.getString(PREF_KEY, "2"));
+
+	// Set status text
 	Resources resources = getResources();
 	String keys[] = resources.getStringArray(R.array.pref_key_entries);
-
 	String layouts[] =
 	    resources.getStringArray(R.array.pref_layout_entries);
-
+        String format = resources.getString(R.string.format);
+        String status = String.format(Locale.getDefault(), format,
+                                      keys[key], layouts[layout]);
 	if (keyView != null)
-	    keyView.setText(keys[key] + "    " + layouts[layout]);
+	    keyView.setText(status);
 
 	// Set reverse
-
 	reverse = preferences.getBoolean(PREF_REVERSE, false);
 
 	// Set reverse switch
-
 	if (revView != null)
 	    revView.setChecked(reverse);
 
 	// Set fascia
-
-	View v = findViewById(R.id.fascia);
-
-	if (v != null)
-	    v.setBackgroundResource(fascias[fascia]);
+	View view = findViewById(R.id.fascia);
+	if (view != null)
+	    view.setBackgroundResource(fascias[fascia]);
     }
 
     // On bellows down
-
     private boolean onBellowsDown(View v, MotionEvent event)
     {
 	if (!bellows)
@@ -429,7 +416,6 @@ public class MainActivity extends Activity
 	    bellows = true;
 
 	    // Change all notes
-
 	    for (int i = 0; i < buttons.length; i++)
 	    {
 		for (int j = 0; j < buttons[i].length; j++)
@@ -454,15 +440,13 @@ public class MainActivity extends Activity
 			    keyvals[key];
 
 			// Stop note
-
-			midi.writeNote(noteOff + i, note, volume);
+			writeNote(noteOff + i, note, volume);
 
 			note = notes[k][bellows? 1: 0] +
 			    keyvals[key];
 
 			// Play note
-
-			midi.writeNote(noteOn + i, note, volume);
+			writeNote(noteOn + i, note, volume);
 
 			switch (i)
 			{
@@ -478,7 +462,6 @@ public class MainActivity extends Activity
 		if (bassStates[i])
 		{
 		    // Play chord
-
 		    int k = (reverse)? basses.length - i - 1: i;
 
 		    switch (k)
@@ -486,35 +469,34 @@ public class MainActivity extends Activity
 		    case 0:
 			{
 			    int note =	bass[key][!bellows? 1: 0][0];
-			    midi.writeNote(noteOff + 2, note, volume);
+			    writeNote(noteOff + 2, note, volume);
 
 			    note =  bass[key][!bellows? 1: 0][1];
-			    midi.writeNote(noteOff + 2, note, volume);
+			    writeNote(noteOff + 2, note, volume);
 
 			    note =  bass[key][bellows? 1: 0][0];
-			    midi.writeNote(noteOn + 2, note, volume);
+			    writeNote(noteOn + 2, note, volume);
 
 			    note =  bass[key][bellows? 1: 0][1];
-			    midi.writeNote(noteOn + 2, note, volume);
+			    writeNote(noteOn + 2, note, volume);
 			}
 			break;
 
 		    case 1:
 			{
 			    int note =	chords[key][!bellows? 1: 0][0];
-			    midi.writeNote(noteOff + 2, note, volume);
+			    writeNote(noteOff + 2, note, volume);
 
 			    note =  chords[key][!bellows? 1: 0][1];
-			    midi.writeNote(noteOff + 2, note, volume);
+			    writeNote(noteOff + 2, note, volume);
 
 			    note =  chords[key][bellows? 1: 0][0];
-			    midi.writeNote(noteOn + 2, note, volume);
+			    writeNote(noteOn + 2, note, volume);
 
 			    note =  chords[key][bellows? 1: 0][1];
-			    midi.writeNote(noteOn + 2, note, volume);
+			    writeNote(noteOn + 2, note, volume);
 			}
 			break;
-
 		    }
 		}
 	    }
@@ -523,6 +505,7 @@ public class MainActivity extends Activity
 	return false;
     }
 
+    // onBellowsUp
     private boolean onBellowsUp(View v, MotionEvent event)
     {
 	if (bellows)
@@ -530,7 +513,6 @@ public class MainActivity extends Activity
 	    bellows = false;
 
 	    // Change all notes
-
 	    for (int i = 0; i < buttons.length; i++)
 	    {
 		for (int j = 0; j < buttons[i].length; j++)
@@ -555,15 +537,13 @@ public class MainActivity extends Activity
 			    keyvals[key];
 
 			// Stop note
-
-			midi.writeNote(noteOff + i, note, volume);
+			writeNote(noteOff + i, note, volume);
 
 			note = notes[k][bellows? 1: 0] +
 			    keyvals[key];
 
 			// Play note
-
-			midi.writeNote(noteOn + i, note, volume);
+			writeNote(noteOn + i, note, volume);
 
 			switch (i)
 			{
@@ -579,37 +559,36 @@ public class MainActivity extends Activity
 		if (bassStates[i])
 		{
 		    // Play chord
-
 		    int k = (reverse)? basses.length - i - 1: i;
 
 		    switch (k)
 		    {
 		    case 0:
 			int note = bass[key][!bellows? 1: 0][0];
-			midi.writeNote(noteOff + 2, note, volume);
+			writeNote(noteOff + 2, note, volume);
 
 			note =  bass[key][!bellows? 1: 0][1];
-			midi.writeNote(noteOff + 2, note, volume);
+			writeNote(noteOff + 2, note, volume);
 
 			note =  bass[key][bellows? 1: 0][0];
-			midi.writeNote(noteOn + 2, note, volume);
+			writeNote(noteOn + 2, note, volume);
 
 			note =  bass[key][bellows? 1: 0][1];
-			midi.writeNote(noteOn + 2, note, volume);
+			writeNote(noteOn + 2, note, volume);
 			break;
 
 		    case 1:
 			note = chords[key][!bellows? 1: 0][0];
-			midi.writeNote(noteOff + 2, note, volume);
+			writeNote(noteOff + 2, note, volume);
 
 			note =  chords[key][!bellows? 1: 0][1];
-			midi.writeNote(noteOff + 2, note, volume);
+			writeNote(noteOff + 2, note, volume);
 
 			note =  chords[key][bellows? 1: 0][0];
-			midi.writeNote(noteOn + 2, note, volume);
+			writeNote(noteOn + 2, note, volume);
 
 			note =  chords[key][bellows? 1: 0][1];
-			midi.writeNote(noteOn + 2, note, volume);
+			writeNote(noteOn + 2, note, volume);
 			break;
 		    }
 		}
@@ -618,12 +597,12 @@ public class MainActivity extends Activity
 	return false;
     }
 
+    // onButtonDown
     private boolean onButtonDown(View v, MotionEvent event)
     {
 	int id = v.getId();
 
 	// Check melody buttons
-
 	for (int i = 0; i < buttons.length; i++)
 	{
 	    for (int j = 0; j < buttons[i].length; j++)
@@ -633,7 +612,6 @@ public class MainActivity extends Activity
 		    buttonStates[i][j] = true;
 
 		    // Play note
-
 		    int k = 0;
 
 		    switch (i)
@@ -649,7 +627,7 @@ public class MainActivity extends Activity
 		    }
 
 		    int note =	notes[k][bellows? 1: 0] + keyvals[key];
-		    midi.writeNote(noteOn + i, note, volume);
+		    writeNote(noteOn + i, note, volume);
 
 		    switch (i)
 		    {
@@ -662,7 +640,6 @@ public class MainActivity extends Activity
 	}
 
 	// Check bass buttons
-
 	for (int i = 0; i < basses.length; i++)
 	{
 	    if (id == basses[i] && !bassStates[i])
@@ -670,25 +647,24 @@ public class MainActivity extends Activity
 		bassStates[i] = true;
 
 		// Play chord
-
 		int k = (reverse)? basses.length - i - 1: i;
 
 		switch(k)
 		{
 		case 0:
 		    int note = bass[key][bellows? 1: 0][0];
-		    midi.writeNote(noteOn + 2, note, volume);
+		    writeNote(noteOn + 2, note, volume);
 
 		    note = bass[key][bellows? 1: 0][1];
-		    midi.writeNote(noteOn + 2, note, volume);
+		    writeNote(noteOn + 2, note, volume);
 		    break;
 
 		case 1:
 		    note = chords[key][bellows? 1: 0][0];
-		    midi.writeNote(noteOn + 2, note, volume);
+		    writeNote(noteOn + 2, note, volume);
 
 		    note = chords[key][bellows? 1: 0][1];
-		    midi.writeNote(noteOn + 2, note, volume);
+		    writeNote(noteOn + 2, note, volume);
 		    break;
 		}
 	    }
@@ -697,6 +673,7 @@ public class MainActivity extends Activity
 	return false;
     }
 
+    // onButtonUp
     private boolean onButtonUp(View v, MotionEvent event)
     {
 	int id = v.getId();
@@ -710,7 +687,6 @@ public class MainActivity extends Activity
 		    buttonStates[i][j] = false;
 
 		    // Stop note
-
 		    int k = 0;
 
 		    switch (i)
@@ -726,7 +702,7 @@ public class MainActivity extends Activity
 		    }
 
 		    int note =	notes[k][bellows? 1: 0] + keyvals[key];
-		    midi.writeNote(noteOff + i, note, 0);
+		    writeNote(noteOff + i, note, 0);
 
 		    switch (i)
 		    {
@@ -739,7 +715,6 @@ public class MainActivity extends Activity
 	}
 
 	// Check bass buttons
-
 	for (int i = 0; i < basses.length; i++)
 	{
 	    if (id == basses[i] && bassStates[i])
@@ -753,18 +728,18 @@ public class MainActivity extends Activity
 		{
 		case 0:
 		    int note = bass[key][bellows? 1: 0][0];
-		    midi.writeNote(noteOff + 2, note, volume);
+		    writeNote(noteOff + 2, note, volume);
 
 		    note = bass[key][bellows? 1: 0][1];
-		    midi.writeNote(noteOff + 2, note, volume);
+		    writeNote(noteOff + 2, note, volume);
 		    break;
 
 		case 1:
 		    note = chords[key][bellows? 1: 0][0];
-		    midi.writeNote(noteOff + 2, note, volume);
+		    writeNote(noteOff + 2, note, volume);
 
 		    note = chords[key][bellows? 1: 0][1];
-		    midi.writeNote(noteOff + 2, note, volume);
+		    writeNote(noteOff + 2, note, volume);
 		    break;
 		}
 		return false;
@@ -775,7 +750,6 @@ public class MainActivity extends Activity
     }
 
     // Show toast.
-
     private void showToast(int key)
     {
 	Resources resources = getResources();
@@ -784,28 +758,25 @@ public class MainActivity extends Activity
 	showToast(text);
     }
 
+    // Show toast.
     private void showToast(String text)
     {
 	// Cancel the last one
-
 	if (toast != null)
 	    toast.cancel();
 
 	// Make a new one
-
 	toast = Toast.makeText(this, text, Toast.LENGTH_SHORT);
 	toast.setGravity(Gravity.CENTER, 0, 0);
 	toast.show();
     }
 
-    // Set listener
-
-    private void setListener()
+    // Set listeners
+    private void setListeners()
     {
 	View v;
 
 	// Set listener for all buttons
-
 	for (int i = 0; i < buttons.length; i++)
 	{
 	    for (int j = 0; j < buttons[i].length; j++)
@@ -817,7 +788,6 @@ public class MainActivity extends Activity
 	}
 
 	// Bass buttons
-
 	for (int i = 0; i < basses.length; i++)
 	{
 	    v = findViewById(basses[i]);
@@ -826,20 +796,43 @@ public class MainActivity extends Activity
 	}
 
 	// Bellows
-
 	v = findViewById(R.id.bellows);
 	if (v != null)
 	    v.setOnTouchListener(this);
 
 	// Reverse switch
-
 	revView = (Switch)findViewById(R.id.reverse);
 	if (revView != null)
 	    revView.setOnCheckedChangeListener(this);
 
-	// Midi start
-
+	// Midi start listener
 	if (midi != null)
 	    midi.setOnMidiStartListener(this);
+    }
+
+    // Write program change message, two bytes
+    public boolean writeChange(int m, int i)
+    {
+	byte changeMsg[] = new byte[2];
+
+	changeMsg[0] = (byte)m;
+	changeMsg[1] = (byte)i;
+
+	midi.write(changeMsg);
+	return true;
+    }
+
+    // Write note message, three bytes
+
+    public boolean writeNote(int m, int n, int v)
+    {
+	byte noteMsg[] = new byte[3];
+
+	noteMsg[0] = (byte)m;
+	noteMsg[1] = (byte)n;
+	noteMsg[2] = (byte)v;
+
+	midi.write(noteMsg);
+	return true;
     }
 }

@@ -4,19 +4,23 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:2.1.3'
     }
 }
 
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 'android-17'
-    buildToolsVersion '25.0.2'
+    compileSdkVersion 'android-22'
+    buildToolsVersion '27.0.2'
+
+    defaultConfig {
+        buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
+    }
 
     lintOptions {
-        abortOnError false
 	disable 'IconDipSize', 'IconDensities', 'IconDuplicates'
+        // abortOnError false
     }
 }
 

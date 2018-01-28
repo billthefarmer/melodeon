@@ -15,7 +15,7 @@
   <string name="licence">Licença: <a
   href="https://www.gnu.org/licenses/gpl.txt">GNU GPLv3</a>
   </string>
-  
+
   <string name="pref_instrument">Instrumento</string>
   <string name="pref_instrument_summ">%s</string>
 

@@ -29,13 +29,14 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
 import android.preference.PreferenceScreen;
 
 // SettingsFragment
-public class SettingsFragment extends PreferenceFragment
-        implements SharedPreferences.OnSharedPreferenceChangeListener {
+@SuppressWarnings("deprecation")
+public class SettingsFragment extends android.preference.PreferenceFragment
+    implements SharedPreferences.OnSharedPreferenceChangeListener
+{
     private static final String KEY_PREF_INSTRUMENT = "pref_instrument";
     private static final String KEY_PREF_LAYOUT = "pref_layout";
     private static final String KEY_PREF_FASCIA = "pref_fascia";
@@ -44,19 +45,20 @@ public class SettingsFragment extends PreferenceFragment
 
     // onCreate
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
 
         // Load the preferences from an XML resource
         addPreferencesFromResource(R.xml.preferences);
 
         SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(getActivity());
+            PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         preferences.registerOnSharedPreferenceChangeListener(this);
 
         ListPreference preference =
-                (ListPreference) findPreference(KEY_PREF_INSTRUMENT);
+            (ListPreference) findPreference(KEY_PREF_INSTRUMENT);
         preference.setSummary(preference.getEntry());
 
         preference = (ListPreference) findPreference(KEY_PREF_LAYOUT);
@@ -79,22 +81,25 @@ public class SettingsFragment extends PreferenceFragment
 
     // onPause
     @Override
-    public void onPause() {
+    public void onPause()
+    {
         super.onPause();
 
         SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences(getActivity());
+            PreferenceManager.getDefaultSharedPreferences(getActivity());
 
         preferences.unregisterOnSharedPreferenceChangeListener(this);
     }
 
     // On preference tree click
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference) {
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference)
+    {
         boolean result =
-                super.onPreferenceTreeClick(preferenceScreen, preference);
+            super.onPreferenceTreeClick(preferenceScreen, preference);
 
-        if (preference instanceof PreferenceScreen) {
+        if (preference instanceof PreferenceScreen)
+        {
             Dialog dialog = ((PreferenceScreen) preference).getDialog();
             ActionBar actionBar = dialog.getActionBar();
             actionBar.setDisplayHomeAsUpEnabled(false);
@@ -105,9 +110,11 @@ public class SettingsFragment extends PreferenceFragment
 
     // On shared preference changed
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences preferences, String key) {
+    public void onSharedPreferenceChanged(SharedPreferences preferences, String key)
+    {
         if (key.equals(KEY_PREF_INSTRUMENT) || key.equals(KEY_PREF_KEY) ||
-                key.equals(KEY_PREF_LAYOUT) || key.equals(KEY_PREF_FASCIA)) {
+                key.equals(KEY_PREF_LAYOUT) || key.equals(KEY_PREF_FASCIA))
+        {
             ListPreference preference = (ListPreference) findPreference(key);
 
             // Set summary to be the user-description for the selected value

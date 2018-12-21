@@ -458,13 +458,13 @@ public class MainActivity extends Activity
                 }
 
                 int note = notes[k][!bellows ? 1 : 0] +
-                    keyvals[key];
+                           keyvals[key];
 
                 // Stop note
                 writeNote(noteOff + i, note, volume);
 
                 note = notes[k][bellows ? 1 : 0] +
-                    keyvals[key];
+                       keyvals[key];
 
                 // Play note
                 writeNote(noteOn + i, note, volume);
@@ -488,36 +488,36 @@ public class MainActivity extends Activity
             switch (k)
             {
             case 0:
-                {
-                    int note = bass[key][!bellows ? 1 : 0][0];
-                    writeNote(noteOff + 2, note, volume);
+            {
+                int note = bass[key][!bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
 
-                    note = bass[key][!bellows ? 1 : 0][1];
-                    writeNote(noteOff + 2, note, volume);
+                note = bass[key][!bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
 
-                    note = bass[key][bellows ? 1 : 0][0];
-                    writeNote(noteOn + 2, note, volume);
+                note = bass[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
 
-                    note = bass[key][bellows ? 1 : 0][1];
-                    writeNote(noteOn + 2, note, volume);
-                }
-                break;
+                note = bass[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+            }
+            break;
 
             case 1:
-                {
-                    int note = chords[key][!bellows ? 1 : 0][0];
-                    writeNote(noteOff + 2, note, volume);
+            {
+                int note = chords[key][!bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
 
-                    note = chords[key][!bellows ? 1 : 0][1];
-                    writeNote(noteOff + 2, note, volume);
+                note = chords[key][!bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
 
-                    note = chords[key][bellows ? 1 : 0][0];
-                    writeNote(noteOn + 2, note, volume);
+                note = chords[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
 
-                    note = chords[key][bellows ? 1 : 0][1];
-                    writeNote(noteOn + 2, note, volume);
-                }
-                break;
+                note = chords[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+            }
+            break;
             }
         }
 
@@ -555,13 +555,13 @@ public class MainActivity extends Activity
                 }
 
                 int note = notes[k][!bellows ? 1 : 0] +
-                    keyvals[key];
+                           keyvals[key];
 
                 // Stop note
                 writeNote(noteOff + i, note, volume);
 
                 note = notes[k][bellows ? 1 : 0] +
-                    keyvals[key];
+                       keyvals[key];
 
                 // Play note
                 writeNote(noteOn + i, note, volume);

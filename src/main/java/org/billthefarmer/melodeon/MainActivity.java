@@ -430,190 +430,191 @@ public class MainActivity extends Activity
     // On bellows down
     private boolean onBellowsDown(View v, MotionEvent event)
     {
-        if (!bellows)
+        if (bellows == true)
+            return false;
+
+        bellows = true;
+
+        // Change all notes
+        for (int i = 0; i < buttons.length; i++)
         {
-            bellows = true;
-
-            // Change all notes
-            for (int i = 0; i < buttons.length; i++)
+            for (int j = 0; j < buttons[i].length; j++)
             {
-                for (int j = 0; j < buttons[i].length; j++)
+                if (buttonStates[i][j] == false)
+                    continue;
+
+                int k = 0;
+
+                switch (i)
                 {
-                    if (buttonStates[i][j])
-                    {
-                        int k = 0;
+                case 0:
+                    k = reverse ? buttons[i].length - j - 1 : j;
+                    break;
 
-                        switch (i)
-                        {
-                        case 0:
-                            k = reverse ? buttons[i].length - j - 1 : j;
-                            break;
-
-                        case 1:
-                            k = reverse ? buttons[i].length - j + 1 : j + 2;
-                            bellows = !bellows;
-                            break;
-                        }
-
-                        int note = notes[k][!bellows ? 1 : 0] +
-                                   keyvals[key];
-
-                        // Stop note
-                        writeNote(noteOff + i, note, volume);
-
-                        note = notes[k][bellows ? 1 : 0] +
-                               keyvals[key];
-
-                        // Play note
-                        writeNote(noteOn + i, note, volume);
-
-                        switch (i)
-                        {
-                        case 1:
-                            bellows = !bellows;
-                        }
-                    }
+                case 1:
+                    k = reverse ? buttons[i].length - j + 1 : j + 2;
+                    bellows = !bellows;
+                    break;
                 }
-            }
 
-            for (int i = 0; i < basses.length; i++)
-            {
-                if (bassStates[i])
+                int note = notes[k][!bellows ? 1 : 0] +
+                    keyvals[key];
+
+                // Stop note
+                writeNote(noteOff + i, note, volume);
+
+                note = notes[k][bellows ? 1 : 0] +
+                    keyvals[key];
+
+                // Play note
+                writeNote(noteOn + i, note, volume);
+
+                switch (i)
                 {
-                    // Play chord
-                    int k = (reverse) ? basses.length - i - 1 : i;
-
-                    switch (k)
-                    {
-                    case 0:
-                    {
-                        int note = bass[key][!bellows ? 1 : 0][0];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = bass[key][!bellows ? 1 : 0][1];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = bass[key][bellows ? 1 : 0][0];
-                        writeNote(noteOn + 2, note, volume);
-
-                        note = bass[key][bellows ? 1 : 0][1];
-                        writeNote(noteOn + 2, note, volume);
-                    }
-                    break;
-
-                    case 1:
-                    {
-                        int note = chords[key][!bellows ? 1 : 0][0];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = chords[key][!bellows ? 1 : 0][1];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = chords[key][bellows ? 1 : 0][0];
-                        writeNote(noteOn + 2, note, volume);
-
-                        note = chords[key][bellows ? 1 : 0][1];
-                        writeNote(noteOn + 2, note, volume);
-                    }
-                    break;
-                    }
+                case 1:
+                    bellows = !bellows;
                 }
             }
         }
 
-        return false;
+        for (int i = 0; i < basses.length; i++)
+        {
+            if (bassStates[i] == false)
+                continue;
+
+            // Play chord
+            int k = (reverse) ? basses.length - i - 1 : i;
+
+            switch (k)
+            {
+            case 0:
+                {
+                    int note = bass[key][!bellows ? 1 : 0][0];
+                    writeNote(noteOff + 2, note, volume);
+
+                    note = bass[key][!bellows ? 1 : 0][1];
+                    writeNote(noteOff + 2, note, volume);
+
+                    note = bass[key][bellows ? 1 : 0][0];
+                    writeNote(noteOn + 2, note, volume);
+
+                    note = bass[key][bellows ? 1 : 0][1];
+                    writeNote(noteOn + 2, note, volume);
+                }
+                break;
+
+            case 1:
+                {
+                    int note = chords[key][!bellows ? 1 : 0][0];
+                    writeNote(noteOff + 2, note, volume);
+
+                    note = chords[key][!bellows ? 1 : 0][1];
+                    writeNote(noteOff + 2, note, volume);
+
+                    note = chords[key][bellows ? 1 : 0][0];
+                    writeNote(noteOn + 2, note, volume);
+
+                    note = chords[key][bellows ? 1 : 0][1];
+                    writeNote(noteOn + 2, note, volume);
+                }
+                break;
+            }
+        }
+
+        return true;
     }
 
     // onBellowsUp
     private boolean onBellowsUp(View v, MotionEvent event)
     {
-        if (bellows)
+        if (bellows == false)
+            return false;
+
+        bellows = false;
+
+        // Change all notes
+        for (int i = 0; i < buttons.length; i++)
         {
-            bellows = false;
-
-            // Change all notes
-            for (int i = 0; i < buttons.length; i++)
+            for (int j = 0; j < buttons[i].length; j++)
             {
-                for (int j = 0; j < buttons[i].length; j++)
+                if (buttonStates[i][j] == false)
+                    continue;
+
+                int k = 0;
+
+                switch (i)
                 {
-                    if (buttonStates[i][j])
-                    {
-                        int k = 0;
+                case 0:
+                    k = reverse ? buttons[i].length - j - 1 : j;
+                    break;
 
-                        switch (i)
-                        {
-                        case 0:
-                            k = reverse ? buttons[i].length - j - 1 : j;
-                            break;
-
-                        case 1:
-                            k = reverse ? buttons[i].length - j + 1 : j + 2;
-                            bellows = !bellows;
-                            break;
-                        }
-
-                        int note = notes[k][!bellows ? 1 : 0] +
-                                   keyvals[key];
-
-                        // Stop note
-                        writeNote(noteOff + i, note, volume);
-
-                        note = notes[k][bellows ? 1 : 0] +
-                               keyvals[key];
-
-                        // Play note
-                        writeNote(noteOn + i, note, volume);
-
-                        switch (i)
-                        {
-                        case 1:
-                            bellows = !bellows;
-                        }
-                    }
+                case 1:
+                    k = reverse ? buttons[i].length - j + 1 : j + 2;
+                    bellows = !bellows;
+                    break;
                 }
-            }
 
-            for (int i = 0; i < basses.length; i++)
-            {
-                if (bassStates[i])
+                int note = notes[k][!bellows ? 1 : 0] +
+                    keyvals[key];
+
+                // Stop note
+                writeNote(noteOff + i, note, volume);
+
+                note = notes[k][bellows ? 1 : 0] +
+                    keyvals[key];
+
+                // Play note
+                writeNote(noteOn + i, note, volume);
+
+                switch (i)
                 {
-                    // Play chord
-                    int k = (reverse) ? basses.length - i - 1 : i;
-
-                    switch (k)
-                    {
-                    case 0:
-                        int note = bass[key][!bellows ? 1 : 0][0];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = bass[key][!bellows ? 1 : 0][1];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = bass[key][bellows ? 1 : 0][0];
-                        writeNote(noteOn + 2, note, volume);
-
-                        note = bass[key][bellows ? 1 : 0][1];
-                        writeNote(noteOn + 2, note, volume);
-                        break;
-
-                    case 1:
-                        note = chords[key][!bellows ? 1 : 0][0];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = chords[key][!bellows ? 1 : 0][1];
-                        writeNote(noteOff + 2, note, volume);
-
-                        note = chords[key][bellows ? 1 : 0][0];
-                        writeNote(noteOn + 2, note, volume);
-
-                        note = chords[key][bellows ? 1 : 0][1];
-                        writeNote(noteOn + 2, note, volume);
-                        break;
-                    }
+                case 1:
+                    bellows = !bellows;
                 }
             }
         }
-        return false;
+
+        for (int i = 0; i < basses.length; i++)
+        {
+            if (bassStates[i] == false)
+                continue;
+
+            // Play chord
+            int k = (reverse) ? basses.length - i - 1 : i;
+
+            switch (k)
+            {
+            case 0:
+                int note = bass[key][!bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
+
+                note = bass[key][!bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
+
+                note = bass[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
+
+                note = bass[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+                break;
+
+            case 1:
+                note = chords[key][!bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
+
+                note = chords[key][!bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
+
+                note = chords[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
+
+                note = chords[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+                break;
+            }
+        }
+
+        return true;
     }
 
     // onButtonDown
@@ -626,66 +627,72 @@ public class MainActivity extends Activity
         {
             for (int j = 0; j < buttons[i].length; j++)
             {
-                if (id == buttons[i][j] && !buttonStates[i][j])
+                if (id != buttons[i][j])
+                    continue;
+
+                if (buttonStates[i][j] == true)
+                    continue;
+
+                buttonStates[i][j] = true;
+
+                // Play note
+                int k = 0;
+
+                switch (i)
                 {
-                    buttonStates[i][j] = true;
+                case 0:
+                    k = (reverse) ? buttons[i].length - j - 1 : j;
+                    break;
 
-                    // Play note
-                    int k = 0;
-
-                    switch (i)
-                    {
-                    case 0:
-                        k = (reverse) ? buttons[i].length - j - 1 : j;
-                        break;
-
-                    case 1:
-                        k = (reverse) ? buttons[i].length - j + 1 : j + 2;
-                        bellows = !bellows;
-                        break;
-                    }
-
-                    int note = notes[k][bellows ? 1 : 0] + keyvals[key];
-                    writeNote(noteOn + i, note, volume);
-
-                    switch (i)
-                    {
-                    case 1:
-                        bellows = !bellows;
-                    }
-                    return false;
+                case 1:
+                    k = (reverse) ? buttons[i].length - j + 1 : j + 2;
+                    bellows = !bellows;
+                    break;
                 }
+
+                int note = notes[k][bellows ? 1 : 0] + keyvals[key];
+                writeNote(noteOn + i, note, volume);
+
+                switch (i)
+                {
+                case 1:
+                    bellows = !bellows;
+                }
+                return false;
             }
         }
 
         // Check bass buttons
         for (int i = 0; i < basses.length; i++)
         {
-            if (id == basses[i] && !bassStates[i])
+            if (id != basses[i])
+                continue;
+
+            if (bassStates[i] == true)
+                continue;
+
+            bassStates[i] = true;
+
+            // Play chord
+            int k = (reverse) ? basses.length - i - 1 : i;
+
+            switch (k)
             {
-                bassStates[i] = true;
+            case 0:
+                int note = bass[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
 
-                // Play chord
-                int k = (reverse) ? basses.length - i - 1 : i;
+                note = bass[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+                break;
 
-                switch (k)
-                {
-                case 0:
-                    int note = bass[key][bellows ? 1 : 0][0];
-                    writeNote(noteOn + 2, note, volume);
+            case 1:
+                note = chords[key][bellows ? 1 : 0][0];
+                writeNote(noteOn + 2, note, volume);
 
-                    note = bass[key][bellows ? 1 : 0][1];
-                    writeNote(noteOn + 2, note, volume);
-                    break;
-
-                case 1:
-                    note = chords[key][bellows ? 1 : 0][0];
-                    writeNote(noteOn + 2, note, volume);
-
-                    note = chords[key][bellows ? 1 : 0][1];
-                    writeNote(noteOn + 2, note, volume);
-                    break;
-                }
+                note = chords[key][bellows ? 1 : 0][1];
+                writeNote(noteOn + 2, note, volume);
+                break;
             }
         }
 
@@ -701,68 +708,74 @@ public class MainActivity extends Activity
         {
             for (int j = 0; j < buttons[i].length; j++)
             {
-                if (id == buttons[i][j] && buttonStates[i][j])
+                if (id != buttons[i][j])
+                    continue;
+
+                if (buttonStates[i][j] == false)
+                    continue;
+
+                buttonStates[i][j] = false;
+
+                // Stop note
+                int k = 0;
+
+                switch (i)
                 {
-                    buttonStates[i][j] = false;
+                case 0:
+                    k = (reverse) ? buttons[i].length - j - 1 : j;
+                    break;
 
-                    // Stop note
-                    int k = 0;
-
-                    switch (i)
-                    {
-                    case 0:
-                        k = (reverse) ? buttons[i].length - j - 1 : j;
-                        break;
-
-                    case 1:
-                        k = (reverse) ? buttons[i].length - j + 1 : j + 2;
-                        bellows = !bellows;
-                        break;
-                    }
-
-                    int note = notes[k][bellows ? 1 : 0] + keyvals[key];
-                    writeNote(noteOff + i, note, 0);
-
-                    switch (i)
-                    {
-                    case 1:
-                        bellows = !bellows;
-                    }
-                    return false;
+                case 1:
+                    k = (reverse) ? buttons[i].length - j + 1 : j + 2;
+                    bellows = !bellows;
+                    break;
                 }
+
+                int note = notes[k][bellows ? 1 : 0] + keyvals[key];
+                writeNote(noteOff + i, note, 0);
+
+                switch (i)
+                {
+                case 1:
+                    bellows = !bellows;
+                }
+                return false;
             }
         }
 
         // Check bass buttons
         for (int i = 0; i < basses.length; i++)
         {
-            if (id == basses[i] && bassStates[i])
+            if (id != basses[i])
+                continue;
+
+            if (bassStates[i] == false)
+                continue;
+
+            bassStates[i] = false;
+
+            // Stop chord
+
+            int k = (reverse) ? basses.length - i - 1 : i;
+            switch (k)
             {
-                bassStates[i] = false;
+            case 0:
+                int note = bass[key][bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
 
-                // Stop chord
+                note = bass[key][bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
+                break;
 
-                int k = (reverse) ? basses.length - i - 1 : i;
-                switch (k)
-                {
-                case 0:
-                    int note = bass[key][bellows ? 1 : 0][0];
-                    writeNote(noteOff + 2, note, volume);
+            case 1:
+                note = chords[key][bellows ? 1 : 0][0];
+                writeNote(noteOff + 2, note, volume);
 
-                    note = bass[key][bellows ? 1 : 0][1];
-                    writeNote(noteOff + 2, note, volume);
-                    break;
-
-                case 1:
-                    note = chords[key][bellows ? 1 : 0][0];
-                    writeNote(noteOff + 2, note, volume);
-
-                    note = chords[key][bellows ? 1 : 0][1];
-                    writeNote(noteOff + 2, note, volume);
-                    break;
-                }
-                return false;
+                note = chords[key][bellows ? 1 : 0][1];
+                writeNote(noteOff + 2, note, volume);
+                break;
             }
+            return false;
         }
 
         return false;

@@ -72,7 +72,7 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
         // Get about summary
         Preference about = findPreference(KEY_PREF_ABOUT);
-        String sum = (String) about.getSummary();
+        String sum = about.getSummary().toString();
 
         // Set version in text view
         String s = String.format(sum, BuildConfig.VERSION_NAME);
@@ -93,7 +93,8 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
     // On preference tree click
     @Override
-    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen, Preference preference)
+    public boolean onPreferenceTreeClick(PreferenceScreen preferenceScreen,
+                                         Preference preference)
     {
         boolean result =
             super.onPreferenceTreeClick(preferenceScreen, preference);
@@ -110,7 +111,8 @@ public class SettingsFragment extends android.preference.PreferenceFragment
 
     // On shared preference changed
     @Override
-    public void onSharedPreferenceChanged(SharedPreferences preferences, String key)
+    public void onSharedPreferenceChanged(SharedPreferences preferences,
+                                          String key)
     {
         if (key.equals(KEY_PREF_INSTRUMENT) || key.equals(KEY_PREF_KEY) ||
                 key.equals(KEY_PREF_LAYOUT) || key.equals(KEY_PREF_FASCIA))

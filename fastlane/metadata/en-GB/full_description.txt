@@ -1,0 +1,9 @@
+Emulates a one row melodeon or a one and a half row organetto. There
+is a choice of midi instruments and keys.
+
+* Keys: Eb, Bb, F, C, G, D, A
+* Instruments: Standard midi set, defaults to accordion
+* Choice of one row melodeon layout and one and a half row organetto layout
+* Choice of fascia images
+
+Uses Sonivox midi synthesizer for midi audio output.

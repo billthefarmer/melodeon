@@ -28,8 +28,8 @@ android {
         applicationId "org.billthefarmer.melodeon"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 114
-        versionName "1.14"
+        versionCode 115
+        versionName "1.15"
 
         buildConfigField "long", "BUILT", System.currentTimeMillis() + "L"
     }
@@ -48,5 +48,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.billthefarmer:mididriver:v1.18'
+    implementation 'com.github.billthefarmer:mididriver:v1.19'
 }

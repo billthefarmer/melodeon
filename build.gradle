@@ -1,18 +1,18 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
         maven { url "https://jitpack.io" }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.2'
+        classpath 'com.android.tools.build:gradle:4.2.1'
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
         maven { url "https://jitpack.io" }
     }
@@ -22,11 +22,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion '29.0.3'
 
     defaultConfig {
         applicationId "org.billthefarmer.melodeon"
-        minSdkVersion 14
+        minSdkVersion 16
         targetSdkVersion 28
         versionCode 115
         versionName "1.15"
@@ -36,7 +35,7 @@ android {
 
     lintOptions {
         disable 'IconDipSize', 'IconDensities', 'IconDuplicates', 'OldTargetApi',
-		'NonConstantResourceId', 'LockedOrientationActivity'
+		'NonConstantResourceId', 'LockedOrientationActivity', 'ExpiredTargetSdkVersion'
         // abortOnError false
     }
 
@@ -48,5 +47,5 @@ android {
 }
 
 dependencies {
-    implementation 'com.github.billthefarmer:mididriver:v1.19'
+    implementation 'com.github.billthefarmer:mididriver:v1.22'
 }

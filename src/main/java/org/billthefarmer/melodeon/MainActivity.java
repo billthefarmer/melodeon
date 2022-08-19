@@ -31,7 +31,9 @@ import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -50,6 +52,8 @@ public class MainActivity extends Activity
     implements View.OnTouchListener, CompoundButton.OnCheckedChangeListener,
     MidiDriver.OnMidiStartListener
 {
+    public final static String TAG = "Melodeon";
+
     // Button ids
     private static final int buttons[][] =
     {
@@ -68,9 +72,35 @@ public class MainActivity extends Activity
         }
     };
 
+    // Keyboard keys
+    private static final int kbkeys[][] =
+    {
+        {
+            KeyEvent.KEYCODE_Z, KeyEvent.KEYCODE_X,
+            KeyEvent.KEYCODE_C, KeyEvent.KEYCODE_V,
+            KeyEvent.KEYCODE_B, KeyEvent.KEYCODE_N,
+            KeyEvent.KEYCODE_M, KeyEvent.KEYCODE_COMMA,
+            KeyEvent.KEYCODE_PERIOD, KeyEvent.KEYCODE_SLASH
+        },
+        {
+            KeyEvent.KEYCODE_S, KeyEvent.KEYCODE_D,
+            KeyEvent.KEYCODE_F, KeyEvent.KEYCODE_G,
+            KeyEvent.KEYCODE_H, KeyEvent.KEYCODE_J,
+            KeyEvent.KEYCODE_K
+        },
+    };
+
     // Bass button ids
     private static final int basses[] =
     {R.id.bass_1, R.id.bass_2};
+
+    // Number keys
+    private static final int nmkeys[] =
+    {KeyEvent.KEYCODE_1, KeyEvent.KEYCODE_2};
+
+    // Function keys
+    private static final int fnkeys[] =
+    {KeyEvent.KEYCODE_F1, KeyEvent.KEYCODE_F2};
 
     // List of key offset values
     private static final int keyvals[] =
@@ -277,6 +307,72 @@ public class MainActivity extends Activity
         }
     }
 
+    // onKeyDown
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)
+    {
+        if (BuildConfig.DEBUG)
+            Log.d(TAG, "KeyCode " + keyCode);
+
+        switch (keyCode)
+        {
+        case KeyEvent.KEYCODE_SPACE:
+        case KeyEvent.KEYCODE_SHIFT_LEFT:
+        case KeyEvent.KEYCODE_SHIFT_RIGHT:
+        case KeyEvent.KEYCODE_CTRL_LEFT:
+        case KeyEvent.KEYCODE_CTRL_RIGHT:
+            return onBellowsDown();
+
+        case KeyEvent.KEYCODE_BACK:
+            finish();
+        }
+
+        for (int i = 0; i < kbkeys.length; i++)
+            for (int j = 0; j < kbkeys[i].length; j++)
+                if (kbkeys[i][j] == keyCode)
+                    return onButtonDown(buttons[i][j]);
+
+        for (int i = 0; i < nmkeys.length; i++)
+            if (nmkeys[i] == keyCode)
+                return onButtonDown(basses[i]);
+
+        for (int i = 0; i < fnkeys.length; i++)
+            if (fnkeys[i] == keyCode)
+                return onButtonDown(basses[i]);
+
+        return false;
+    }
+
+    // onKeyUp
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event)
+    {
+        switch (keyCode)
+        {
+        case KeyEvent.KEYCODE_SPACE:
+        case KeyEvent.KEYCODE_SHIFT_LEFT:
+        case KeyEvent.KEYCODE_SHIFT_RIGHT:
+        case KeyEvent.KEYCODE_CTRL_LEFT:
+        case KeyEvent.KEYCODE_CTRL_RIGHT:
+            return onBellowsUp();
+        }
+
+        for (int i = 0; i < kbkeys.length; i++)
+            for (int j = 0; j < kbkeys[i].length; j++)
+                if (kbkeys[i][j] == keyCode)
+                    return onButtonUp(buttons[i][j]);
+
+        for (int i = 0; i < nmkeys.length; i++)
+            if (nmkeys[i] == keyCode)
+                return onButtonUp(basses[i]);
+
+        for (int i = 0; i < fnkeys.length; i++)
+            if (fnkeys[i] == keyCode)
+                return onButtonUp(basses[i]);
+
+        return false;
+    }
+
     // On touch
     @Override
     @SuppressLint("ClickableViewAccessibility")
@@ -292,10 +388,10 @@ public class MainActivity extends Activity
             switch (id)
             {
             case R.id.bellows:
-                return onBellowsDown(v, event);
+                return onBellowsDown();
 
             default:
-                return onButtonDown(v, event);
+                return onButtonDown(id);
             }
 
         // Up
@@ -303,10 +399,10 @@ public class MainActivity extends Activity
             switch (id)
             {
             case R.id.bellows:
-                return onBellowsUp(v, event);
+                return onBellowsUp();
 
             default:
-                return onButtonUp(v, event);
+                return onButtonUp(id);
             }
 
         default:
@@ -428,7 +524,7 @@ public class MainActivity extends Activity
     }
 
     // On bellows down
-    private boolean onBellowsDown(View v, MotionEvent event)
+    private boolean onBellowsDown()
     {
         if (bellows == true)
             return false;
@@ -525,7 +621,7 @@ public class MainActivity extends Activity
     }
 
     // onBellowsUp
-    private boolean onBellowsUp(View v, MotionEvent event)
+    private boolean onBellowsUp()
     {
         if (bellows == false)
             return false;
@@ -618,10 +714,8 @@ public class MainActivity extends Activity
     }
 
     // onButtonDown
-    private boolean onButtonDown(View v, MotionEvent event)
+    private boolean onButtonDown(int id)
     {
-        int id = v.getId();
-
         // Check melody buttons
         for (int i = 0; i < buttons.length; i++)
         {
@@ -700,10 +794,8 @@ public class MainActivity extends Activity
     }
 
     // onButtonUp
-    private boolean onButtonUp(View v, MotionEvent event)
+    private boolean onButtonUp(int id)
     {
-        int id = v.getId();
-
         for (int i = 0; i < buttons.length; i++)
         {
             for (int j = 0; j < buttons[i].length; j++)

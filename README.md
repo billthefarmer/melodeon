@@ -1,4 +1,4 @@
-# ![Logo](src/main/res/drawable-xhdpi/ic_launcher.png) Melodeon [![.github/workflows/main.yml](https://github.com/billthefarmer/melodeon/workflows/.github/workflows/main.yml/badge.svg)](https://github.com/billthefarmer/melodeon/actions) [![Release](https://img.shields.io/github/release/billthefarmer/melodeon.svg?logo=github)](https://github.com/billthefarmer/melodeon/releases)
+# ![Logo](src/main/res/drawable-xhdpi/ic_launcher.png) Melodeon [![.github/workflows/build.yml](https://github.com/billthefarmer/melodeon/workflows/.github/workflows/build.yml/badge.svg)](https://github.com/billthefarmer/melodeon/actions) [![Release](https://img.shields.io/github/release/billthefarmer/melodeon.svg?logo=github)](https://github.com/billthefarmer/melodeon/releases)
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.svg" alt="Get it on F-Droid" height="80">](https://f-droid.org/packages/org.billthefarmer.melodeon)
 
 An Android melodeon emulator. Emulates a one row melodeon and a one

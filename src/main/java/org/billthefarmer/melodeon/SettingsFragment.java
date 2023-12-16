@@ -26,6 +26,7 @@ package org.billthefarmer.melodeon;
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -37,12 +38,6 @@ import android.preference.PreferenceScreen;
 public class SettingsFragment extends android.preference.PreferenceFragment
     implements SharedPreferences.OnSharedPreferenceChangeListener
 {
-    private static final String KEY_PREF_INSTRUMENT = "pref_instrument";
-    private static final String KEY_PREF_LAYOUT = "pref_layout";
-    private static final String KEY_PREF_FASCIA = "pref_fascia";
-    private static final String KEY_PREF_ABOUT = "pref_about";
-    private static final String KEY_PREF_KEY = "pref_key";
-
     // onCreate
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -55,28 +50,38 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         SharedPreferences preferences =
             PreferenceManager.getDefaultSharedPreferences(getActivity());
 
-        preferences.registerOnSharedPreferenceChangeListener(this);
-
         ListPreference preference =
-            (ListPreference) findPreference(KEY_PREF_INSTRUMENT);
+            (ListPreference) findPreference(MainActivity.PREF_INSTRUMENT);
         preference.setSummary(preference.getEntry());
 
-        preference = (ListPreference) findPreference(KEY_PREF_LAYOUT);
+        preference = (ListPreference) findPreference(MainActivity.PREF_LAYOUT);
         preference.setSummary(preference.getEntry());
 
-        preference = (ListPreference) findPreference(KEY_PREF_KEY);
+        preference = (ListPreference) findPreference(MainActivity.PREF_FASCIA);
         preference.setSummary(preference.getEntry());
 
-        preference = (ListPreference) findPreference(KEY_PREF_FASCIA);
+        preference = (ListPreference) findPreference(MainActivity.PREF_THEME);
+        preference.setSummary(preference.getEntry());
+
+        preference = (ListPreference) findPreference(MainActivity.PREF_KEY);
         preference.setSummary(preference.getEntry());
 
         // Get about summary
-        Preference about = findPreference(KEY_PREF_ABOUT);
+        Preference about = findPreference(MainActivity.PREF_ABOUT);
         String sum = about.getSummary().toString();
 
         // Set version in text view
         String s = String.format(sum, BuildConfig.VERSION_NAME);
         about.setSummary(s);
+    }
+
+    // on Resume
+    @Override
+    public void onResume()
+    {
+        super.onResume();
+        getPreferenceScreen().getSharedPreferences()
+            .registerOnSharedPreferenceChangeListener(this);
     }
 
     // onPause
@@ -114,8 +119,10 @@ public class SettingsFragment extends android.preference.PreferenceFragment
     public void onSharedPreferenceChanged(SharedPreferences preferences,
                                           String key)
     {
-        if (key.equals(KEY_PREF_INSTRUMENT) || key.equals(KEY_PREF_KEY) ||
-                key.equals(KEY_PREF_LAYOUT) || key.equals(KEY_PREF_FASCIA))
+        if (key.equals(MainActivity.PREF_INSTRUMENT) ||
+            key.equals(MainActivity.PREF_KEY) ||
+            key.equals(MainActivity.PREF_LAYOUT) ||
+            key.equals(MainActivity.PREF_FASCIA))
         {
             ListPreference preference = (ListPreference) findPreference(key);
 

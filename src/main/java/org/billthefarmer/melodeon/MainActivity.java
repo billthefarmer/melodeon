@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -54,6 +55,19 @@ public class MainActivity extends Activity
     MidiDriver.OnMidiStartListener
 {
     public final static String TAG = "Melodeon";
+
+    // Preferences
+    public final static String PREF_INSTRUMENT = "pref_instrument";
+    public final static String PREF_REVERSE = "pref_reverse";
+    public final static String PREF_LAYOUT = "pref_layout";
+    public final static String PREF_FASCIA = "pref_fascia";
+    public final static String PREF_ABOUT = "pref_about";
+    public final static String PREF_THEME = "pref_theme";
+    public final static String PREF_KEY = "pref_key";
+
+    public static final int LIGHT  = 0;
+    public static final int DARK   = 1;
+    public static final int SYSTEM = 2;
 
     // Button ids
     private static final int buttons[][] =
@@ -156,13 +170,6 @@ public class MainActivity extends Activity
 
     public static final int VERSION_CODE_S_V2 = 32;
 
-    // Preferences
-    private final static String PREF_INSTRUMENT = "pref_instrument";
-    private final static String PREF_REVERSE = "pref_reverse";
-    private final static String PREF_LAYOUT = "pref_layout";
-    private final static String PREF_FASCIA = "pref_fascia";
-    private final static String PREF_KEY = "pref_key";
-
     // Layouts
     private final static int layouts[] =
     {
@@ -206,6 +213,7 @@ public class MainActivity extends Activity
     private int volume;
     private int layout;
     private int fascia;
+    private int theme;
     private int key;
 
     // MidiDriver
@@ -224,6 +232,33 @@ public class MainActivity extends Activity
 
         // Get preferences
         getPreferences();
+
+        Configuration config = getResources().getConfiguration();
+        int night = config.uiMode & Configuration.UI_MODE_NIGHT_MASK;
+
+        switch (theme)
+        {
+        case LIGHT:
+            setTheme(R.style.AppTheme);
+            break;
+
+        case DARK:
+            setTheme(R.style.AppDarkTheme);
+            break;
+
+        case SYSTEM:
+            switch (night)
+            {
+            case Configuration.UI_MODE_NIGHT_NO:
+                setTheme(R.style.AppTheme);
+                break;
+
+            case Configuration.UI_MODE_NIGHT_YES:
+                setTheme(R.style.AppDarkTheme);
+                break;
+            }
+            break;
+        }
 
         // Set layout
         setContentView(layouts[layout]);
@@ -269,8 +304,14 @@ public class MainActivity extends Activity
     {
         super.onResume();
 
+        int last = theme;
+
         // Get preferences
         getPreferences();
+
+        // Recreate
+        if (last != theme && Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+            recreate();
 
         // Start midi
         if (midi != null)
@@ -498,6 +539,9 @@ public class MainActivity extends Activity
             if (view != null)
                 view.setBackgroundResource(fascias[fascia]);
         }
+
+        // Get theme
+        theme = Integer.parseInt(preferences.getString(PREF_THEME, "0"));
 
         // Get key
         key = Integer.parseInt(preferences.getString(PREF_KEY, "2"));

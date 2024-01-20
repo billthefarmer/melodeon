@@ -35,7 +35,7 @@ android {
     }
 
     lintOptions {
-        disable 'IconDipSize', 'IconDensities', 'IconDuplicates', 'OldTargetApi',
+        disable 'OldTargetApi',
 		'NonConstantResourceId', 'LockedOrientationActivity', 'ExpiredTargetSdkVersion',
 		'AndroidGradlePluginVersion', 'VectorPath'
         // abortOnError false

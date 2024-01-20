@@ -36,8 +36,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_3"
@@ -45,8 +49,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_4"
@@ -54,8 +62,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_5"
@@ -63,8 +75,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_6"
@@ -72,8 +88,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_7"
@@ -81,8 +101,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_8"
@@ -90,8 +114,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_9"
@@ -100,8 +128,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
   </LinearLayout>
 
@@ -121,8 +153,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_12"
@@ -130,8 +166,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_13"
@@ -139,8 +179,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_14"
@@ -148,8 +192,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_15"
@@ -157,8 +205,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_16"
@@ -166,8 +218,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/button_17"
@@ -176,8 +232,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
   </LinearLayout>
 
@@ -210,8 +270,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
     <ImageButton
         android:id="@+id/bass_2"
@@ -220,8 +284,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
+        android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:src="@drawable/ic_button_large" />
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_button" />
 
   </LinearLayout>
 
@@ -239,7 +307,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:thumb="@drawable/ic_button" />
+        android:thumb="@drawable/thumb" />
 
   </RelativeLayout>
 

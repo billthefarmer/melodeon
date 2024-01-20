@@ -122,12 +122,19 @@ public class SettingsFragment extends android.preference.PreferenceFragment
         if (key.equals(MainActivity.PREF_INSTRUMENT) ||
             key.equals(MainActivity.PREF_KEY) ||
             key.equals(MainActivity.PREF_LAYOUT) ||
+            key.equals(MainActivity.PREF_THEME) ||
             key.equals(MainActivity.PREF_FASCIA))
         {
             ListPreference preference = (ListPreference) findPreference(key);
 
             // Set summary to be the user-description for the selected value
             preference.setSummary(preference.getEntry());
+        }
+
+        if (key.equals(MainActivity.PREF_THEME))
+        {
+            if (Build.VERSION.SDK_INT != Build.VERSION_CODES.M)
+                getActivity().recreate();
         }
     }
 }

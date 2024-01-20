@@ -7,13 +7,26 @@
     android:layout_height="match_parent"
     tools:ignore="RtlHardcoded">
 
+  <Button
+      android:id="@+id/dummy"
+      style="?android:attr/borderlessButtonStyle"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentLeft="true"
+      android:layout_alignParentTop="true"
+      android:layout_alignParentBottom="true"
+      android:layout_marginLeft="8dp"
+      android:layout_marginTop="8dp"
+      android:layout_marginBottom="8dp"
+      android:background="@android:color/transparent" />
+
   <LinearLayout
       android:id="@+id/row_1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_alignParentLeft="true"
       android:layout_centerVertical="true"
-      android:layout_marginLeft="32dp"
+      android:layout_marginLeft="8dp"
+      android:layout_toRightOf="@id/dummy"
       android:orientation="vertical"
       tools:ignore="ContentDescription">
 
@@ -25,8 +38,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -38,8 +51,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -51,8 +64,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -64,8 +77,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -77,8 +90,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -90,8 +103,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -103,8 +116,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -116,8 +129,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -129,8 +142,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -143,16 +156,15 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
   </LinearLayout>
 
-  <ImageButton
+  <Button
       android:id="@+id/bellows"
-      style="?android:attr/borderlessButtonStyle"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:layout_alignTop="@id/row_1"
@@ -162,10 +174,7 @@
       android:layout_marginTop="8dp"
       android:layout_marginRight="8dp"
       android:layout_marginBottom="8dp"
-      android:background="@android:color/transparent"
-      android:minWidth="64dp"
-      android:src="@drawable/colour_button"
-      tools:ignore="ContentDescription" />
+      android:background="@drawable/colour_button" />
 
   <LinearLayout
       android:id="@+id/row_2"
@@ -185,8 +194,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -199,8 +208,8 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="48dp"
-        android:maxHeight="48dp"
+        android:maxWidth="72dp"
+        android:maxHeight="72dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 

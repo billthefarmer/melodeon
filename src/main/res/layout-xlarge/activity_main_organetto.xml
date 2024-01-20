@@ -38,8 +38,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -51,8 +51,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -64,8 +64,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -77,8 +77,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -90,8 +90,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -103,8 +103,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -116,8 +116,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -130,8 +130,8 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -155,8 +155,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -168,8 +168,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -181,8 +181,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -194,8 +194,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -207,8 +207,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -220,8 +220,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -234,8 +234,8 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -272,8 +272,8 @@
         android:layout_marginTop="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
@@ -286,8 +286,8 @@
         android:layout_marginBottom="8dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
-        android:maxWidth="96dp"
-        android:maxHeight="96dp"
+        android:maxWidth="108dp"
+        android:maxHeight="108dp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_button" />
 
